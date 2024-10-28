@@ -1,0 +1,71 @@
+/* Global Styles for Typography */
+
+body {
+  font-family: "Roboto", sans-serif; /* Clean, modern font */
+  color: #333; /* Darker text for better contrast */
+  line-height: 1.6; /* Better readability */
+  margin: 0;
+  padding: 0;
+  background-color: #ecf0f1; /* Light background to contrast the sidebar */
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+p {
+  margin-bottom: 15px;
+  color: #7f8c8d;
+}
+/* Global Button Styles */
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+  transform: scale(1.05); /* Slight grow on hover */
+}
+/* Media Queries for Responsiveness */
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .sidebarItem a {
+    font-size: 16px;
+  }
+
+  .whatsappForm {
+    width: 100%;
+    margin: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebarItem a {
+    font-size: 14px;
+  }
+
+  .whatsappForm input,
+  .whatsappForm textarea {
+    font-size: 14px;
+  }
+
+  .whatsappForm button {
+    font-size: 16px;
+  }
+}

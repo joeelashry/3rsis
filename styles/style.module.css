@@ -1,0 +1,101 @@
+/* styles.css */
+
+.body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0; /* Light background for contrast */
+}
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  background: #06daff; /* White background for the sidebar */
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.sidebar h2 {
+  font-size: 1.5em;
+}
+
+.sidebar ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 10px 0; /* Spacing between items */
+}
+
+.sidebar a {
+  text-decoration: none; /* Remove underline */
+  color: #333; /* Dark text color */
+  padding: 5px;
+  display: block; /* Make the link fill the item */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.sidebar a:hover {
+  background-color: #e0e0e0; /* Highlight on hover */
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background: #ffffff; /* White background for main content */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-left: 10px; /* Space between sidebar and content */
+}
+
+.h1 {
+  font-size: 2em; /* Adjust size for headings */
+}
+
+/* style.css */
+
+/* styles/style.module.css */
+/* styles/style.module.css */
+/* styles/style.module.css */
+
+.sidebar {
+  position: fixed; /* Fix the sidebar to the left */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  width: 200px; /* Width of the sidebar */
+  height: 100vh; /* Full height */
+  padding: 20px; /* Add padding */
+  background-color: #f4f4f4; /* Background color */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  overflow-y: auto; /* Scroll if needed */
+  z-index: 1000; /* Make sure it stays on top */
+}
+
+.sidebarTitle {
+  font-size: 1.5em; /* Font size for title */
+}
+
+.sidebarList {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove default padding */
+}
+
+.sidebarItem {
+  margin: 10px 0; /* Margin for items */
+}
+
+.sidebarItem a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.sidebarItem a:hover {
+  color: #ff9800;
+  padding-left: 5px;
+  transition: padding-left 0.3s ease;
+}
