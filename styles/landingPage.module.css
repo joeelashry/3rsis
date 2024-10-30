@@ -1,0 +1,84 @@
+/* styles/landingPage.module.css */
+
+.landingContainer {
+  font-family: Arial, sans-serif;
+  color: #333;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.header {
+  background-color: #004080;
+  color: #fff;
+  padding: 3rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.header p {
+  font-size: 1.25rem;
+}
+
+.aboutSection,
+.appSection,
+.statsSection {
+  margin: 2rem 0;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.aboutSection h2,
+.appSection h2,
+.statsSection h2 {
+  font-size: 2rem;
+  color: #004080;
+  margin-bottom: 1rem;
+}
+
+.statsSection {
+  display: flex;
+  justify-content: space-around;
+}
+
+.stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.stat h3 {
+  font-size: 2.5rem;
+  color: #004080;
+  margin: 0;
+}
+
+.stat p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.footer {
+  margin-top: 2rem;
+}
+
+.startButton {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: #004080;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.25rem;
+  transition: background-color 0.3s;
+}
+
+.startButton:hover {
+  background-color: #0066cc;
+}

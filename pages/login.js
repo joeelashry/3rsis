@@ -3,7 +3,6 @@ import Link from 'next/link';
 import LoginForm from './components/auth/LoginForm';
 import styles from '@/styles/auth.module.css'; // Adjust this path if necessary
 
-
 const LoginPage = () => {
     return (
         <div className={styles.authContainer}>

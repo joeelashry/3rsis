@@ -1,28 +1,17 @@
 // components/Sidebar.js
-
-import React from 'react';
 import Link from 'next/link';
-import styles from './Sidebar.module.css'; // Adjust the path according to your structure
+import styles from './sidebarLayout.module.css';
 
 const Sidebar = () => {
   return (
-    <div className={styles.sidebar}>
-      <h2 className={styles.sidebarTitle}>Menu</h2>
-      <ul className={styles.sidebarList}>
-        <li className={styles.sidebarItem}>
-          <Link href="/bots">Bots Page</Link>
-        </li>
-        <li className={styles.sidebarItem}>
-          <Link href="/chats">Chats Page</Link>
-        </li>
-        <li className={styles.sidebarItem}>
-          <Link href="/analysis">Analysis Page</Link>
-        </li>
-        <li className={styles.sidebarItem}>
-          <Link href="/WhatsAppPage">WhatsApp Page</Link> {/* New WhatsApp link */}
-        </li>
-      </ul>
-    </div>
+      <div className={styles.sidebar}>
+          <h2>Sui</h2>
+          <Link href="/bots" className={styles.link}>My Bots</Link>
+          <Link href="/WhatsAppPage" className={styles.link}>Add your whatsapp</Link>
+          <Link href="/chats" className={styles.link}>My chats</Link>
+          <Link href="/register" className={styles.link}>كسم الل في بالي </Link>
+        
+      </div>
   );
 };
 

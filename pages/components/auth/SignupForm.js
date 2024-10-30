@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setToken } from '@/store/tokenSlice'; // Adjust based on your store structure
+import { setAccess } from '@/store/accessSlice'; // Adjust based on your store structure
 import { useRouter } from 'next/router';
 import styles from '@/styles/auth.module.css'; // Adjust this path if necessary
 
@@ -20,7 +20,7 @@ const SignupForm = () => {
         setError('');
 
         try {
-            const response = await fetch('https://distinctly-creative-starfish.ngrok-free.app/register/', {
+            const response = await fetch('https://api.juren.tech/register/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -28,9 +28,9 @@ const SignupForm = () => {
 
             if (!response.ok) throw new Error('Error creating account');
 
-            const { token } = await response.json();
-            dispatch(setToken(token)); // Save token in Redux
-            localStorage.setItem('authToken', token); // Save token in localStorage
+            const { access } = await response.json();
+            dispatch(setAccess(access)); // Save access in Redux
+            localStorage.setItem('access', access); // Save access in localStorage
             router.push('/dashboard'); // Redirect to dashboard
 
         } catch (err) {

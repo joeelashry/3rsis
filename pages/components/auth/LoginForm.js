@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setToken } from '@/store/tokenSlice';
+import { setAccess } from '@/store/accessSlice';
 import { useRouter } from 'next/router';
-import styles from '@/styles/auth.module.css'; // Adjust this path if necessary
-
+import styles from '@/styles/auth.module.css';
 
 export const LoginForm = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -19,20 +18,24 @@ export const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-
+    
         try {
-            const response = await fetch('https://distinctly-creative-starfish.ngrok-free.app/token/', {
+            const response = await fetch('https://api.juren.tech/token/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
-
+    
             if (!response.ok) throw new Error('Invalid login credentials');
-            const { token } = await response.json();
-            dispatch(setToken(token));           // Save token in Redux
-            localStorage.setItem('authToken', token); // Save token in localStorage
-            router.push('/bots');           // Redirect to protected route
-
+            
+            const  {access}  = await response.json();
+            console.log(access);
+            dispatch(setAccess(access)); // Save access in Redux
+            localStorage.setItem('access', access);
+            console.log(access);
+            console.log(localStorage.getItem('access')); // Save access in localStorage
+            router.push('/bots'); // Redirect to protected route
+    
         } catch (err) {
             setError(err.message);
         }
@@ -64,4 +67,4 @@ export const LoginForm = () => {
     );
 };
 
-export default LoginForm; // Ensure it's the default export
+export default LoginForm;

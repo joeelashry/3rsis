@@ -1,27 +1,30 @@
-// components/BotsPage.js
-import React from 'react';
+// pages/bots/BotsPage.js
 import Sidebar from './components/Sidebar';
+import Layout from './components/Layout';
+import AddBotForm from './components/AddBotForm';
+import FetchBotsList from './components/FetchBotsList';
+import styles from '../styles/botsPage.module.css';
+import React from 'react';
+
 
 const BotsPage = () => {
+    const refreshBots = () => {
+        // This can be implemented to trigger a refresh in FetchBotsList
+    };
+
     return (
-        <div className="container">
-            <Sidebar />
-            <main className="content">
-                <h1>Bots Page</h1>
-                <form>
-                    <div>
-                        <label htmlFor="botName">Bot Name:</label>
-                        <input type="text" id="botName" name="botName" required />
-                    </div>
-                    <div>
-                        <label htmlFor="botDescription">Description:</label>
-                        <textarea id="botDescription" name="botDescription" required></textarea>
-                    </div>
-                    <button type="submit">Register Bot</button>
-                </form>
-                {/* TODO: Connect to backend for bot registration */}
-            </main>
-        </div>
+        <Layout>
+            <div className={styles.container}>
+                <Sidebar />
+                <main className={styles.content}>
+                    <h1 className={styles.h1}>Bots Page</h1>
+                    <section className={styles.bot}>
+                        <AddBotForm onAdd={refreshBots} />
+                        <FetchBotsList />
+                    </section>
+                </main>
+            </div>
+        </Layout>
     );
 };
 

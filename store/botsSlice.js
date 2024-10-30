@@ -6,9 +6,13 @@ const botsSlice = createSlice({
   initialState: [],
   reducers: {
     addBot: (state, action) => {
-      state.push(action.payload);
+      state.push({
+        id: state.length + 1,
+        name: action.payload.name,
+        description: action.payload.description,
+        extraInfo: action.payload.extraInfo // Store Extra Info
+      });
     },
-    // You can add more reducers here for future actions
   },
 });
 

@@ -1,12 +1,14 @@
+// pages/whatsapp.js
 import { useState } from 'react';
 import styles from '../styles/whatsapp.module.css';
+import Layout from './components/Layout';
 
 const WhatsAppPage = () => {
     const [formData, setFormData] = useState({
-        userName: '',
-        phoneNumber: '',
-        accessToken: '',
-        phoneId: ''
+        name: '',
+        number: '',
+        access_token: '',
+        phone_number_id: ''
     });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,40 +23,30 @@ const WhatsAppPage = () => {
         setErrors({ ...errors, [name]: '' }); // Clear errors on input change
     };
 
-    const validateForm = () => {
-        let formErrors = {};
-        const phoneNumberPattern = /^0(10|11|12)[0-9]{8}$/;
-
-        if (!formData.userName.trim()) formErrors.userName = "User Name is required.";
-        if (!phoneNumberPattern.test(formData.phoneNumber)) {
-            formErrors.phoneNumber = "Phone number must start with 010, 011, or 012 and be followed by 8 digits.";
-        }
-        if (!formData.accessToken.trim()) formErrors.accessToken = "Access Token is required.";
-        if (!formData.phoneId.trim()) formErrors.phoneId = "Phone ID is required.";
-
-        setErrors(formErrors);
-        return Object.keys(formErrors).length === 0;
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setMessage('');
-        if (!validateForm()) return;
-
         setIsSubmitting(true);
         try {
-            const response = await fetch('/api/whatsapp', {
+            const jwtToken = localStorage.getItem('access'); // Assumes the JWT is stored under this key
+            const response = await fetch('https://api.juren.tech/whatsapp-numbers/', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwtToken}` // Include JWT token here
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({
+                    name: formData.name,
+                    number: formData.number,
+                    access_token: formData.access_token,
+                    phone_number_id: formData.phone_number_id
+                })
             });
             const data = await response.json();
 
             if (response.ok) {
                 setMessage({ text: 'Data stored successfully!', type: 'success' });
-                setFormData({ userName: '', phoneNumber: '', accessToken: '', phoneId: '' });
+                setFormData({ name: '', number: '', access_token: '', phone_number_id: '' });
             } else {
                 setMessage({ text: data.message || 'An error occurred.', type: 'error' });
             }
@@ -66,72 +58,84 @@ const WhatsAppPage = () => {
     };
 
     return (
-        <div className="container">
-            <h1>WhatsApp Register</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="userName">User Name:</label>
-                    <input
-                        type="text"
-                        id="userName"
-                        name="userName"
-                        value={formData.userName}
-                        onChange={handleChange}
-                        aria-invalid={!!errors.userName}
-                        aria-describedby="userNameError"
-                        required
-                    />
-                    {errors.userName && <p id="userNameError" className="error-text">{errors.userName}</p>}
+        <Layout>
+            <div className={styles.container}>
+                <div className={styles.whatsappForm}>
+                    <h1 className={styles.h1}>WhatsApp Register</h1>
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <label htmlFor="name">Name:</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                className={styles.input}
+                                aria-invalid={!!errors.name}
+                                aria-describedby="nameError"
+                                required
+                            />
+                            {errors.name && <p id="nameError" className={styles.errorText}>{errors.name}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="number">Phone Number:</label>
+                            <input
+                                type="text"
+                                id="number"
+                                name="number"
+                                value={formData.number}
+                                onChange={handleChange}
+                                placeholder="010xxxxxxxx"
+                                className={styles.input}
+                                aria-invalid={!!errors.number}
+                                aria-describedby="numberError"
+                                required
+                            />
+                            {errors.number && <p id="numberError" className={styles.errorText}>{errors.number}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="access_token">Access Token:</label>
+                            <input
+                                type="text"
+                                id="access_token"
+                                name="access_token"
+                                value={formData.access_token}
+                                onChange={handleChange}
+                                className={styles.input}
+                                aria-invalid={!!errors.access_token}
+                                aria-describedby="accessTokenError"
+                                required
+                            />
+                            {errors.access_token && <p id="accessTokenError" className={styles.errorText}>{errors.access_token}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="phone_number_id">Phone Number ID:</label>
+                            <input
+                                type="text"
+                                id="phone_number_id"
+                                name="phone_number_id"
+                                value={formData.phone_number_id}
+                                onChange={handleChange}
+                                className={styles.input}
+                                aria-invalid={!!errors.phone_number_id}
+                                aria-describedby="phoneIdError"
+                                required
+                            />
+                            {errors.phone_number_id && <p id="phoneIdError" className={styles.errorText}>{errors.phone_number_id}</p>}
+                        </div>
+                        <button type="submit" className={styles.button} disabled={isSubmitting}>
+                            {isSubmitting ? 'Submitting...' : 'Save WhatsApp Bot Info'}
+                        </button>
+                    </form>
+                    {message && (
+                        <p className={`${styles.message} ${message.type === 'success' ? styles.successText : styles.errorText}`}>
+                            {message.text}
+                        </p>
+                    )}
                 </div>
-                <div>
-                    <label htmlFor="phoneNumber">Phone Number:</label>
-                    <input
-                        type="text"
-                        id="phoneNumber"
-                        name="phoneNumber"
-                        value={formData.phoneNumber}
-                        onChange={handleChange}
-                        placeholder="010xxxxxxxx"
-                        aria-invalid={!!errors.phoneNumber}
-                        aria-describedby="phoneNumberError"
-                        required
-                    />
-                    {errors.phoneNumber && <p id="phoneNumberError" className="error-text">{errors.phoneNumber}</p>}
-                </div>
-                <div>
-                    <label htmlFor="accessToken">Access Token:</label>
-                    <input
-                        type="text"
-                        id="accessToken"
-                        name="accessToken"
-                        value={formData.accessToken}
-                        onChange={handleChange}
-                        aria-invalid={!!errors.accessToken}
-                        aria-describedby="accessTokenError"
-                        required
-                    />
-                    {errors.accessToken && <p id="accessTokenError" className="error-text">{errors.accessToken}</p>}
-                </div>
-                <div>
-                    <label htmlFor="phoneId">Phone Number ID:</label>
-                    <input
-                        type="text"
-                        id="phoneId"
-                        name="phoneId"
-                        value={formData.phoneId}
-                        onChange={handleChange}
-                        aria-invalid={!!errors.phoneId}
-                        aria-describedby="phoneIdError"
-                        required
-                    />
-                    {errors.phoneId && <p id="phoneIdError" className="error-text">{errors.phoneId}</p>}
-                </div>
-                <button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? 'Submitting...' : 'Save WhatsApp Bot Info'}
-                </button>
-            </form>
-            {message && <p style={{ color: message.type === 'success' ? 'green' : 'red' }}>{message.text}</p>}
-        </div>
+            </div>
+        </Layout>
     );
 };
 

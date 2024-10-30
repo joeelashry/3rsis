@@ -1,11 +1,10 @@
 // pages/_app.js
 import { useEffect } from 'react';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import store from '@/store/store';
-import { setToken } from '@/store/tokenSlice';
+import { setAccess } from '@/store/accessSlice'; // Updated import for access actions
 import '../styles/style.module.css';
-import { useDispatch } from 'react-redux';
 
 function MyApp({ Component, pageProps }) {
     return (
@@ -20,19 +19,16 @@ const AppContent = ({ Component, pageProps }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const savedToken = localStorage.getItem('authToken');
-        if (savedToken) {
-            dispatch(setToken(savedToken));
+        const savedAccess = localStorage.getItem('access');
+
+        if (savedAccess) {
+            dispatch(setAccess(savedAccess));
         } else if (router.pathname !== '/signup' && router.pathname !== '/login') {
-            router.replace('/signup'); // Redirect to signup if no token is found
+            router.replace('/signup'); // Redirect to signup if no access is found
         }
     }, [router, dispatch]);
 
-    return (
-        <>
-            <Component {...pageProps} />
-        </>
-    );
-}
+    return <Component {...pageProps} />;
+};
 
 export default MyApp;

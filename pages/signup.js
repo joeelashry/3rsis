@@ -6,17 +6,15 @@ import SignupForm from './components/auth/SignupForm'; // Ensure the path is cor
 import Link from 'next/link';
 import styles from '@/styles/auth.module.css'; // Adjust this path if necessary
 
-
-
 const SignupPage = () => {
-    const token = useSelector((state) => state.token.value);
+    const access = useSelector((state) => state.access.value); // Use access instead of token
     const router = useRouter();
 
     useEffect(() => {
-        if (token) {
+        if (access) {
             router.replace('/bots'); // Redirect if user is already logged in
         }
-    }, [token, router]);
+    }, [access, router]);
 
     return (
         <div className={styles.authContainer}>

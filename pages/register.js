@@ -1,10 +1,9 @@
-// pages/dashboard.js
 import Link from 'next/link';
 import withAuth from './components/withAuth';
 import Layout from './components/Layout';
 import styles from '@/styles/dashboard.module.css';
 
-const DashboardPage = () => {
+const dashboard = () => {
     return (
         <Layout> {/* Wrap content in Layout for sidebar */}
             <div className={styles.dashboardContainer}>

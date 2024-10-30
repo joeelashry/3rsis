@@ -1,9 +1,11 @@
 // components/ChatsPage.js
 import React from 'react';
 import Sidebar from './components/Sidebar';
+import Layout from './components/Layout';
 
 const ChatsPage = () => {
     return (
+        <Layout>
         <div className="container">
             <Sidebar />
             <main className="content">
@@ -12,7 +14,9 @@ const ChatsPage = () => {
                 {/* TODO: Connect to backend to fetch and display chats */}
             </main>
         </div>
+        </Layout>
     );
+    
 };
 
 export default ChatsPage;
